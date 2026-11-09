@@ -2,13 +2,7 @@
 
 A warm, plain color scheme for Vim.
 
-## Screenshots
-
-![C](screenshots/c.png)
-
-![Markdown](screenshots/markdown.png)
-
-![Vim](screenshots/vim.png)
+![Screenshot](assets/vim-boreal.png)
 
 ## License
 
