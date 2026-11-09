@@ -9,7 +9,7 @@ highlight clear
 if exists('syntax_on')
   syntax reset
 endif
-let g:colors_name = 'frosty'
+let g:colors_name = 'boreal'
 
 function! s:Hi(group, fg, bg)
   execute 'highlight ' . a:group ' guifg=' . a:fg . ' guibg=' . a:bg . ' gui=none'
