@@ -25,17 +25,24 @@ let s:blizzard = '#e4e4e4'
 let s:twilight = '#666450'
 let s:dusk = '#1e1e1c'
 let s:eggnog = '#bfbca4'
-let s:fireplace = '#f28948'
-let s:petrichor = '#48b1f2'
-let s:sunkiss = '#f2de48'
-let s:crimson = '#47312e'
+let s:fireplace = '#ed9863'
+let s:petrichor = '#7ab7dd'
+let s:sunkiss = '#e0cd7f'
+let s:maroon = '#47312e'
+let s:crimson = '#c99088'
 
 call s:Hi('Normal', 'none', 'none')
+call s:Link('NormalFloat', 'Normal')
 call s:Hi('MatchParen', s:fireplace, s:dusk)
 call s:Hi('Search', s:dusk, s:petrichor)
 call s:Hi('CurSearch', s:dusk, s:sunkiss)
 
-call s:Hi('Error', 'none', s:crimson)
+call s:Hi('DiagnosticInfo', s:eggnog, 'none')
+call s:Hi('DiagnosticError', s:crimson, 'none')
+call s:Hi('DiagnosticWarn', s:sunkiss, 'none')
+call s:Hi('DiagnosticHint', s:petrichor, 'none')
+
+call s:Hi('Error', 'none', s:maroon)
 
 call s:Hi('NonText', s:twilight, 'none')
 call s:Link('LineNr', 'NonText')
