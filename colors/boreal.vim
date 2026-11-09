@@ -5,21 +5,13 @@
 " License: GPL-3.0
 
 set background=dark
-highlight clear
-if exists('syntax_on')
+hi clear
+if exists('g:syntax_on')
   syntax reset
 endif
 let g:colors_name = 'boreal'
 
-function! s:Hi(group, fg, bg)
-  execute 'highlight ' . a:group ' guifg=' . a:fg . ' guibg=' . a:bg . ' gui=none'
-endfunction
-
-function! s:Link(from, to)
-  execute 'highlight ' a:from . ' none'
-  execute 'highlight link ' . a:from . ' ' . a:to
-endfunction
-
+" TODO(frosty): Cover the full 4-bit ANSI color palette
 let s:aurora = '#deef70'
 let s:blizzard = '#e4e4e4'
 let s:twilight = '#666450'
@@ -31,11 +23,19 @@ let s:sunkiss = '#e0cd7f'
 let s:maroon = '#47312e'
 let s:crimson = '#c99088'
 
+fun! s:Hi(group, fg, bg, ...)
+  let gui = a:0 >= 1 ? a:1 : 'none'
+  let guisp = a:0 >= 2 ? a:2 : 'none'
+  exe 'hi ' . a:group ' guifg=' . a:fg . ' guibg=' . a:bg . ' gui=' . gui
+        \ . ' guisp=' . guisp
+endfun
+
 call s:Hi('Normal', 'none', 'none')
-call s:Link('NormalFloat', 'Normal')
+hi! link NormalFloat Normal
 call s:Hi('MatchParen', s:fireplace, s:dusk)
 call s:Hi('Search', s:dusk, s:petrichor)
 call s:Hi('CurSearch', s:dusk, s:sunkiss)
+call s:Hi('Todo', s:sunkiss, 'none')
 
 call s:Hi('DiagnosticInfo', s:eggnog, 'none')
 call s:Hi('DiagnosticError', s:crimson, 'none')
@@ -45,37 +45,43 @@ call s:Hi('DiagnosticHint', s:petrichor, 'none')
 call s:Hi('Error', 'none', s:maroon)
 
 call s:Hi('NonText', s:twilight, 'none')
-call s:Link('LineNr', 'NonText')
-call s:Link('Comment', 'NonText')
-call s:Link('EndOfBuffer', 'NonText')
+hi! link LineNr NonText
+hi! link Comment NonText
+hi! link EndOfBuffer NonText
 
 call s:Hi('String', s:aurora, 'none')
 
 call s:Hi('Constant', s:blizzard, 'none')
-call s:Link('CursorLineNr', 'Constant')
-call s:Link('Identifier', 'Constant')
-call s:Link('Statement', 'Constant')
-call s:Link('Type', 'Constant')
-call s:Link('Function', 'Constant')
-call s:Link('Scope', 'Constant')
-call s:Link('WinSeparator', 'Constant')
+hi! link CursorLineNr Constant
+hi! link Identifier Constant
+hi! link Statement Constant
+hi! link Type Constant
+hi! link Function Constant
+hi! link Scope Constant
+hi! link WinSeparator Constant
 
 call s:Hi('Special', s:eggnog, 'none')
-call s:Link('Character', 'Special')
-call s:Link('Boolean', 'Special')
-call s:Link('Number', 'Special')
-call s:Link('Float', 'Special')
-call s:Link('Structure', 'Special')
-call s:Link('StorageClass', 'Special')
-call s:Link('PreProc', 'Special')
-call s:Link('Macro', 'PreProc')
-call s:Link('ModeMsg', 'Special')
-call s:Link('Title', 'Special')
-call s:Link('Directory', 'Special')
+hi! link Character Special
+hi! link Boolean Special
+hi! link Number Special
+hi! link Float Special
+hi! link Structure Special
+hi! link StorageClass Special
+hi! link PreProc Special
+hi! link Macro PreProc
+hi! link ModeMsg Special
+hi! link Title Special
+hi! link Directory Special
 
 call s:Hi('Visual', s:dusk, s:eggnog)
 
 call s:Hi('StatusLine', 'none', s:dusk)
 call s:Hi('StatusLineNC', s:eggnog, 'none')
+
+call s:Hi('SpellBad', s:crimson, 'none', 'underline', s:crimson)
+
+hi! link @markup.link Constant
+hi! link @markup.link.label Special
+hi! link @markup.link.markdown_inline Constant
 
 " vim: ts=2 sw=2 et
